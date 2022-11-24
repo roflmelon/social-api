@@ -16,8 +16,7 @@ const userSchema = new Schema(
       //validate using regex
       validate: {
         validator: function (e) {
-          let regex = `/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`;
-          return regex.test(e);
+          return e.match(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
         },
         message: 'Please enter valid email.',
       },
@@ -46,7 +45,6 @@ const userSchema = new Schema(
 userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
 });
-
 const User = model('user', userSchema);
 
 module.exports = User;
